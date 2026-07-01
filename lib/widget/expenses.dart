@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_section5/expenses_list.dart';
+import 'package:flutter_section5/widget/expenses_list/expenses_list.dart';
 import 'package:flutter_section5/models/expense.dart';
 
 class Expenses extends StatefulWidget {
@@ -67,6 +67,7 @@ class _ExpensesState extends State<Expenses> {
       body: Column(
         children: [
           Text("The Chart"),
+          SizedBox(height: 10,),
           Expanded(child: ExpensesList(expense: _registeredExpenses)),
         ],
       ),

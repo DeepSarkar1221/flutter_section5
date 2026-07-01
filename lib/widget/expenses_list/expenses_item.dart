@@ -1,0 +1,37 @@
+
+import 'package:flutter/material.dart';
+import 'package:flutter_section5/models/expense.dart';
+
+class ExpensesItem extends StatelessWidget{
+  const ExpensesItem({super.key,required this.expense});
+  final Expense expense;
+  @override
+  Widget build(BuildContext context) {
+    return Card(child: Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 16
+      ),
+      child: Column(
+        children: [
+          Text(expense.title),
+          SizedBox(height: 4,),
+          Row(children: [
+            Text('\$${expense.ammount.toStringAsFixed(2)}'),
+            const Spacer(),
+            Row(children: [
+              const Icon(Icons.alarm),
+              const SizedBox(width: 5,),
+              Text(expense.date.toString()),
+            ],)
+          ],)
+        ],
+      ),
+    ),);
+  }
+
+
+  
+
+
+}
