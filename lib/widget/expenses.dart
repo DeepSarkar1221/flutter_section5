@@ -34,7 +34,7 @@ class _ExpensesState extends State<Expenses> {
       title: "Holud Chai",
       ammount: 100.10,
       date: DateTime.now(),
-      category: Category.food,
+      category: Category.leisure,
     ),
     Expense(
       title: "Blue Chai",
@@ -46,7 +46,7 @@ class _ExpensesState extends State<Expenses> {
       title: "Lal Chai",
       ammount: 100.10,
       date: DateTime.now(),
-      category: Category.food,
+      category: Category.work,
     ),
     Expense(
       title: "Sobuj Chai",
@@ -58,12 +58,19 @@ class _ExpensesState extends State<Expenses> {
       title: "Kalo Chai",
       ammount: 100.10,
       date: DateTime.now(),
-      category: Category.food,
+      category: Category.travel,
     ),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Flutter Expense Tracker"),
+        
+        actions: [
+        
+        IconButton(onPressed: (){}, icon: Icon(Icons.add))
+      ],),
       body: Column(
         children: [
           Text("The Chart"),
