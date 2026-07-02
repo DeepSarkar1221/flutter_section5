@@ -1,33 +1,40 @@
- 
+import 'package:flutter/material.dart';
 
- import 'package:flutter/material.dart';
-
-class NewExpense extends StatefulWidget{
+class NewExpense extends StatefulWidget {
   const NewExpense({super.key});
 
   @override
   State<NewExpense> createState() {
-   return _NewExpensesState();
+    return _NewExpensesState();
   }
-
-
 }
 
-class _NewExpensesState extends State<NewExpense>{
-  @override
-  Widget build(BuildContext context) {
-    return Padding(padding: const EdgeInsets.all(16),
-      child: Column(children: [
-        TextField(
-          maxLength: 50,
-          decoration: InputDecoration(label: Text("Title")),
-        )
-      ],),
-    
-    
-    );
-   
-
+class _NewExpensesState extends State<NewExpense> {
+  var _enteredTitle = '';
+  void _newInputText(String input) {
+    _enteredTitle = input;
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        children: [
+          TextField(
+            onChanged: _newInputText,
+            maxLength: 50,
+            decoration: InputDecoration(label: Text("Title")),
+          ),
+          Row(
+            children: [
+              ElevatedButton(onPressed:(){
+                print(_enteredTitle);
+              } , child: Text("Submit")),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 }
