@@ -3,7 +3,7 @@ import 'package:flutter_section5/widget/expenses.dart';
 
 void main(){
   runApp(MaterialApp(
-    theme: ThemeData(useMaterial3: true),
+    theme: ThemeData(useMaterial3: false),
     
     home: Expenses(),));
 }

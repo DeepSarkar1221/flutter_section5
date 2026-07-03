@@ -14,8 +14,9 @@ class _NewExpensesState extends State<NewExpense> {
   final _titleController = TextEditingController();
   final _ammountController = TextEditingController();
   DateTime? _selectDate;
+  Category _selectCategory = Category.work;
 
-  void _presentDataSelect() async {
+  void _presentDateSelect() async {
     final now = DateTime.now();
     final first = DateTime(now.year - 1);
     final last = DateTime(now.year + 1, now.month, now.day + 3);
@@ -26,8 +27,7 @@ class _NewExpensesState extends State<NewExpense> {
       lastDate: last,
     );
     setState(() {
-    _selectDate = presentDate;
-      
+      _selectDate = presentDate;
     });
   }
 
@@ -72,7 +72,7 @@ class _NewExpensesState extends State<NewExpense> {
                           : formatter.format(_selectDate!),
                     ),
                     IconButton(
-                      onPressed: _presentDataSelect,
+                      onPressed: _presentDateSelect,
                       icon: Icon(Icons.calendar_month_rounded),
                     ),
                   ],
@@ -80,8 +80,31 @@ class _NewExpensesState extends State<NewExpense> {
               ),
             ],
           ),
+          SizedBox(height: 16,),
           Row(
             children: [
+              DropdownButton(
+                value: _selectCategory,
+                items: Category.values
+                    .map(
+                      (category) => DropdownMenuItem(
+                        value: category,
+                        child: Text(category.name.toUpperCase()),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (value) {
+                  if (value == null) {
+                    return;
+                  }
+                  setState(() {
+                    _selectCategory = value;
+                  });
+                },
+              ),
+              Spacer(),
+              SizedBox(height: 8,),
+              
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
