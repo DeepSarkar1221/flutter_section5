@@ -19,52 +19,26 @@ class _ExpensesState extends State<Expenses> {
       date: DateTime.now(),
       category: Category.food,
     ),
-    Expense(
-      title: "Mint Chai",
-      ammount: 100.10,
-      date: DateTime.now(),
-      category: Category.food,
-    ),
-    Expense(
-      title: "Pudina Chai",
-      ammount: 100.10,
-      date: DateTime.now(),
-      category: Category.food,
-    ),
-    Expense(
-      title: "Holud Chai",
-      ammount: 100.10,
-      date: DateTime.now(),
-      category: Category.leisure,
-    ),
-    Expense(
-      title: "Blue Chai",
-      ammount: 100.10,
-      date: DateTime.now(),
-      category: Category.food,
-    ),
+
     Expense(
       title: "Lal Chai",
       ammount: 100.10,
       date: DateTime.now(),
       category: Category.work,
     ),
-    Expense(
-      title: "Sobuj Chai",
-      ammount: 100.10,
-      date: DateTime.now(),
-      category: Category.food,
-    ),
-    Expense(
-      title: "Kalo Chai",
-      ammount: 100.10,
-      date: DateTime.now(),
-      category: Category.travel,
-    ),
   ];
 
   void _openAddExpenseOverlay() {
-    showModalBottomSheet(context: context, builder: (ctx) => NewExpense());
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => NewExpense(onaddExpense: _addExpense),
+    );
+  }
+
+  void _addExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
   }
 
   @override
@@ -74,10 +48,7 @@ class _ExpensesState extends State<Expenses> {
         title: Text("Flutter Expense Tracker"),
 
         actions: [
-          IconButton(
-            onPressed: _openAddExpenseOverlay, 
-            icon: Icon(Icons.add)
-          ),
+          IconButton(onPressed: _openAddExpenseOverlay, icon: Icon(Icons.add)),
         ],
       ),
       body: Column(
