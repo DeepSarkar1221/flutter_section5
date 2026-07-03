@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_section5/models/expense.dart';
 
@@ -29,6 +31,32 @@ class _NewExpensesState extends State<NewExpense> {
     setState(() {
       _selectDate = presentDate;
     });
+  }
+
+  void _submitExpenseData() {
+    final enteredAmmount = double.tryParse(_ammountController.text);
+    final inValidText = _titleController.text.trim().isEmpty;
+    final invalidAmmoount = enteredAmmount == null || enteredAmmount <= 0;
+    if (invalidAmmoount || inValidText || _selectDate == null) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text("Invalid Input"),
+          content: Text(
+            "Your Entered Title or Ammount or Date can be Invalid, Please Check For that !!",
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(ctx);
+              },
+              child: Text("Close"),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
   }
 
   @override
@@ -80,7 +108,7 @@ class _NewExpensesState extends State<NewExpense> {
               ),
             ],
           ),
-          SizedBox(height: 16,),
+          SizedBox(height: 16),
           Row(
             children: [
               DropdownButton(
@@ -103,8 +131,8 @@ class _NewExpensesState extends State<NewExpense> {
                 },
               ),
               Spacer(),
-              SizedBox(height: 8,),
-              
+              SizedBox(height: 8),
+
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -112,10 +140,7 @@ class _NewExpensesState extends State<NewExpense> {
                 child: Text("Cancel"),
               ),
               ElevatedButton(
-                onPressed: () {
-                  print(_titleController.text);
-                  print(_ammountController.text);
-                },
+                onPressed: _submitExpenseData,
                 child: Text("Submit"),
               ),
             ],
