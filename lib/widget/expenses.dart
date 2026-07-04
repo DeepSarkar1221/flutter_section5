@@ -7,7 +7,7 @@ class Expenses extends StatefulWidget {
   const Expenses({super.key});
   @override
   State<Expenses> createState() {
-    return (_ExpensesState());
+    return _ExpensesState();
   }
 }
 
@@ -30,6 +30,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (ctx) => NewExpense(onaddExpense: _addExpense),
     );
@@ -38,6 +39,12 @@ class _ExpensesState extends State<Expenses> {
   void _addExpense(Expense expense) {
     setState(() {
       _registeredExpenses.add(expense);
+    });
+  }
+
+  void _removeExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.remove(expense);
     });
   }
 
@@ -55,7 +62,12 @@ class _ExpensesState extends State<Expenses> {
         children: [
           Text("The Chart"),
           SizedBox(height: 10),
-          Expanded(child: ExpensesList(expense: _registeredExpenses)),
+          Expanded(
+            child: ExpensesList(
+              expense: _registeredExpenses,
+              removeExpense: _removeExpense,
+            ),
+          ),
         ],
       ),
     );
